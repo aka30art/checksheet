@@ -1,5 +1,17 @@
-const CACHE="kiverco-checksheet-v6";
+const CACHE="kiverco-checksheet-v7";
 const ASSETS=["./","./index.html","./manifest.webmanifest"];
-self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS))));
-self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));
-self.addEventListener("fetch",e=>{if(e.request.method!=="GET")return;e.respondWith(caches.match(e.request).then(cached=>cached||fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return r;}).catch(()=>caches.match("./"))));});
+self.addEventListener("install",event=>event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(ASSETS);await self.skipWaiting();})()));
+self.addEventListener("activate",event=>event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)));await self.clients.claim();})()));
+self.addEventListener("fetch",event=>{
+ if(event.request.method!=="GET")return;
+ const url=new URL(event.request.url);
+ if(url.origin!==self.location.origin)return;
+ const isPage=event.request.mode==="navigate"||url.pathname.endsWith(".html")||url.pathname.endsWith("/");
+ event.respondWith((async()=>{
+  if(isPage){
+   try{const fresh=await fetch(event.request,{cache:"no-store"});if(fresh.ok){const cache=await caches.open(CACHE);await cache.put(event.request,fresh.clone());}return fresh;}catch(error){return (await caches.match(event.request))||caches.match("./");}
+  }
+  const cached=await caches.match(event.request);if(cached)return cached;
+  const response=await fetch(event.request);if(response.ok){const cache=await caches.open(CACHE);cache.put(event.request,response.clone());}return response;
+ })());
+});
