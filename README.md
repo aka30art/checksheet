@@ -3,13 +3,13 @@
 A mobile-first plant inspection checklist and print-to-PDF report generator.
 
 ## Included
-- 14 equipment sections and 65 checkpoints.
+- 14 equipment sections and 65 checkpoints. Each category shows its completed-check count and can only be collapsed once every checkpoint in that category has a status.
 - Per-check status: OK, Low, Medium, High, NO START.
 - Per-check hours and comment/defect details.
-- Operator, inspection date, plant and optional shift/notes.
+- Operator, inspection date, plant, overall hour-meter reading and optional shift/notes.
 - Completion and defect counters.
 - Automatic local-device progress saving.
-- Print-ready A4 PDF layout using the browser's Save as PDF / Print workflow.
+- Print-ready A4 PDF layout using the browser's Save as PDF / Print workflow. PDF generation is locked until all 65 checkpoints have a selected status.
 - Installable PWA shell with offline caching.
 
 ## Deploy
