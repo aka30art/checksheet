@@ -3,7 +3,7 @@
 A mobile-first plant inspection checklist and print-to-PDF report generator.
 
 ## Included
-- 14 equipment sections and 72 checkpoints.
+- 14 equipment sections and 65 checkpoints.
 - Per-check status: OK, Low, Medium, High, NO START.
 - Per-check hours and comment/defect details.
 - Operator, inspection date, plant and optional shift/notes.
