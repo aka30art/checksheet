@@ -1,0 +1,10 @@
+{
+  "name": "Kiverco Plant Checksheet",
+  "short_name": "Kiverco Checks",
+  "description": "Plant inspection checklist and PDF report generator",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0d1210",
+  "theme_color": "#101714",
+  "icons": []
+}
