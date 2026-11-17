@@ -42,7 +42,7 @@ footer{text-align:center;color:#65756a;font-size:10px;padding:15px 0 5px}
  .field input{background:#fff!important;color:#111!important;border:0!important;border-bottom:1px solid #999!important;border-radius:0!important;padding:8px 0!important;min-height:30px}
  .progress-wrap{display:none!important}
  #printReport{display:block!important;color:#111!important}
- .print-category{margin:0 0 15px;break-inside:avoid}
+ .print-report-title{font-size:22px;letter-spacing:1px;margin:0 0 18px;padding:0 0 10px;border-bottom:2px solid #222}\n .print-no-defects{font-size:12px;font-weight:700;margin-top:20px}\n .print-category{margin:0 0 15px;break-inside:avoid}
  .print-category h2{font-size:13px;text-transform:uppercase;letter-spacing:.5px;margin:0 0 5px;padding:0 0 5px;border-bottom:1px solid #555}
  .print-item{display:grid;grid-template-columns:minmax(130px,1fr) 95px minmax(130px,1.5fr);gap:10px;padding:6px 3px;border-bottom:1px solid #ddd;font-size:10px;break-inside:avoid}
  .print-item span{overflow-wrap:anywhere}
@@ -146,20 +146,25 @@ function load(){
 }
 function buildPrintReport(){
  const root=$("printReport");root.innerHTML="";
+ const title=document.createElement("h1");title.className="print-report-title";title.textContent="DEFECT SHEET";root.appendChild(title);
+ let defectCount=0;
  EQUIPMENT.forEach(([category,items])=>{
+  const defects=items.filter(item=>{const status=state.checks[key(category,item)]?.status;return status&&status!=="OK";});
+  if(!defects.length)return;
   const section=document.createElement("section");section.className="print-category";
   const heading=document.createElement("h2");heading.textContent=category;section.appendChild(heading);
   const header=document.createElement("div");header.className="print-head";header.innerHTML="<span>Check</span><span>Priority</span><span>Comments</span>";section.appendChild(header);
-  items.forEach(item=>{
+  defects.forEach(item=>{
    const data=state.checks[key(category,item)]||{};
    const row=document.createElement("div");row.className="print-item";
    const check=document.createElement("span");check.textContent=item;
-   const status=document.createElement("span");status.className="print-status";status.textContent=data.status&&data.status!=="OK"?"❌ "+data.status:"";status.setAttribute("aria-label",data.status&&data.status!=="OK"?"Defect priority: "+data.status:"");
-   const comment=document.createElement("span");comment.className="print-comment";comment.textContent=data.comment||"—";
-   row.append(check,status,comment);section.appendChild(row);
+   const status=document.createElement("span");status.className="print-status";status.textContent="❌ "+data.status;status.setAttribute("aria-label","Defect priority: "+data.status);
+   const comment=document.createElement("span");comment.className="print-comment";comment.textContent=data.comment||"";
+   row.append(check,status,comment);section.appendChild(row);defectCount++;
   });
   root.appendChild(section);
  });
+ if(!defectCount){const empty=document.createElement("p");empty.className="print-no-defects";empty.textContent="NO DEFECTS RECORDED";root.appendChild(empty);}
 }
 function generatePDF(){
  save(false);const meta=getMeta();
