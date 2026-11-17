@@ -154,7 +154,7 @@ function buildPrintReport(){
    const data=state.checks[key(category,item)]||{};
    const row=document.createElement("div");row.className="print-item";
    const check=document.createElement("span");check.textContent=item;
-   const status=document.createElement("span");status.className="print-status";status.textContent=data.status||"";
+   const status=document.createElement("span");status.className="print-status";status.textContent=data.status?(data.status==="OK"?"✅ OK":"❌ "+data.status):"";status.setAttribute("aria-label",data.status==="OK"?"Passed": "Defect priority: "+(data.status||""));
    const comment=document.createElement("span");comment.className="print-comment";comment.textContent=data.comment||"—";
    row.append(check,status,comment);section.appendChild(row);
   });
