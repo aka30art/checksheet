@@ -18,7 +18,7 @@ header{padding:24px 2px 16px;display:flex;justify-content:space-between;align-it
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:17px;margin-bottom:14px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.section-title h3{margin:0;font-size:14px;letter-spacing:.2px}.section-title span{font-size:11px;color:var(--muted)}
 .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:11px;color:var(--muted);margin:0 0 7px;font-weight:700}.field input,.field textarea{width:100%;border:1px solid var(--line);background:#0e1511;color:var(--text);border-radius:11px;padding:12px;outline:none;min-width:0}.field input:focus,.field textarea:focus,.comment:focus{border-color:var(--green2)}.field input{min-height:46px}.field input[readonly]{color:#c4d5c8}.progress-wrap{margin:15px 0 0}.progress-head{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:7px}.track{height:7px;background:#27332c;border-radius:9px;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:9px;transition:width .2s}
 .toolbar{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:18px 0 10px}.toolbar h3{font-size:15px;margin:0}.toolbar-actions{display:flex;gap:7px}.small-btn,.outline-btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 11px;border-radius:10px;font-size:11px;font-weight:750}.small-btn:active,.outline-btn:active{transform:scale(.98)}
-.category{background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden}.cat-head{width:100%;border:0;background:transparent;color:var(--text);padding:15px;display:flex;text-align:left;align-items:center;gap:12px}.cat-icon{width:34px;height:34px;background:#1b3524;border-radius:11px;display:grid;place-items:center;color:var(--green);flex:none}.cat-name{font-weight:800;font-size:14px;flex:1}.cat-meta{font-size:10px;color:var(--muted);display:block;margin-top:3px;font-weight:500}.cat-count{font-size:11px;color:var(--muted);white-space:nowrap}.chevron{color:var(--muted);font-size:16px;transition:transform .2s}.category.open .chevron{transform:rotate(180deg)}.cat-body{display:none;padding:0 12px 12px}.category.open .cat-body{display:block}
+.category{background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden}.cat-head{width:100%;border:0;background:transparent;color:var(--text);padding:15px;display:flex;text-align:left;align-items:center;gap:12px}.cat-icon{width:34px;height:34px;background:#1b3524;border-radius:11px;display:grid;place-items:center;color:var(--green);flex:none}.cat-name{font-weight:800;font-size:14px;flex:1}.cat-meta{font-size:10px;color:var(--muted);display:block;margin-top:3px;font-weight:500}.cat-count{font-size:11px;color:var(--muted);white-space:nowrap}.chevron{color:var(--muted);font-size:16px;transition:transform .2s}.category.open .chevron{transform:rotate(180deg)}.cat-body{display:none;padding:0 12px 12px}.category.open .cat-body{display:block}.cat-footer{padding:0 15px 13px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:8px}.cat-footer strong{color:var(--green)}.cat-head:disabled{cursor:default;opacity:1}.cat-head:disabled .chevron{opacity:.3}.primary:disabled{opacity:.42;cursor:not-allowed;box-shadow:none}
 .check-row{background:#0f1712;border:1px solid #253229;border-radius:13px;padding:12px;margin-top:9px}.check-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px}.check-name{font-size:13px;font-weight:750}.row-number{font-size:10px;color:#819387}
 .choices{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.choice{padding:9px 2px;border:1px solid #35443a;background:#17211b;border-radius:9px;color:#b4c2b8;font-size:10px;font-weight:800;min-height:39px}.choice[data-value="OK"]{--c:var(--green)}.choice[data-value="Low"]{--c:#8bbaff}.choice[data-value="Medium"]{--c:var(--amber)}.choice[data-value="High"]{--c:#ff9872}.choice[data-value="NO START"]{--c:var(--red)}.choice.active{border-color:var(--c);background:color-mix(in srgb,var(--c) 18%,#17211b);color:var(--c);box-shadow:inset 0 0 0 1px var(--c)}
 .row-fields{display:grid;grid-template-columns:105px 1fr;gap:8px;margin-top:9px}.row-fields input{width:100%;border:1px solid #2c3b31;background:#141d17;color:var(--text);border-radius:9px;padding:10px;font-size:12px;min-width:0}.row-fields input::placeholder{color:#748478}.row-fields input.hours{text-align:center}
@@ -43,22 +43,22 @@ footer{text-align:center;color:#65756a;font-size:10px;padding:15px 0 5px}
 <div class="field"><label for="operator">OPERATOR</label><input id="operator" value="Jan Janak" autocomplete="name"></div>
 <div class="field"><label for="date">INSPECTION DATE</label><input id="date" type="date"></div>
 <div class="field"><label for="plant">PLANT</label><input id="plant" value="Kiverco"></div>
-<div class="field"><label for="shift">SHIFT / NOTES (OPTIONAL)</label><input id="shift" placeholder="e.g. Day shift"></div>
+<div class="field"><label for="hours">PLANT HOURS</label><input id="hours" type="number" min="0" step="0.1" inputmode="decimal" placeholder="Enter hour meter reading"></div><div class="field"><label for="shift">SHIFT / NOTES (OPTIONAL)</label><input id="shift" placeholder="e.g. Day shift"></div>
 </div>
-<div class="progress-wrap"><div class="progress-head"><span>Inspection completion</span><strong id="progressText">0 / 72</strong></div><div class="track"><div class="fill" id="progressFill"></div></div></div>
+<div class="progress-wrap"><div class="progress-head"><span>Inspection completion</span><strong id="progressText">0 / 65</strong></div><div class="track"><div class="fill" id="progressFill"></div></div></div>
 </section>
 <div class="toolbar no-print"><h3>Equipment checkpoints</h3><div class="toolbar-actions"><button class="small-btn" id="expandAll">Expand all</button><button class="small-btn" id="collapseAll">Collapse</button></div></div>
 <div class="legend no-print"><span><i class="dot" style="background:#a8e6b4"></i> OK</span><span><i class="dot" style="background:#8bbaff"></i> Low</span><span><i class="dot" style="background:#ffca72"></i> Medium</span><span><i class="dot" style="background:#ff9872"></i> High</span><span><i class="dot" style="background:#ff716d"></i> No Start</span></div>
 <div id="categories"></div>
 <section class="panel">
 <div class="section-title"><h3>REPORT GENERATION</h3><span>PDF documentation</span></div>
-<p style="color:var(--muted);font-size:12px;line-height:1.5;margin:0">The report includes all checkpoint statuses, hours and comments, including items not yet checked. For a completed inspection, review the remaining count before generating your PDF.</p>
-<div class="report-actions no-print"><button class="primary" id="pdfBtn">Generate PDF report</button><button class="secondary" id="saveBtn">Save progress</button></div>
+<p style="color:var(--muted);font-size:12px;line-height:1.5;margin:0">PDF generation unlocks only when all 65 checkpoints have a status selected. Every checkpoint must be marked OK, Low, Medium, High or NO START.</p>
+<div class="report-actions no-print"><button class="primary" id="pdfBtn" disabled>PDF locked · Complete 100%</button><button class="secondary" id="saveBtn">Save progress</button></div>
 <div class="print-only print-footer">Generated from Kiverco Plant Checksheet · Operator: <span id="printOperator"></span> · Date: <span id="printDate"></span></div>
 </section>
 <footer>Plant inspection record · Keep completed reports with site maintenance documentation</footer>
 </div>
-<div class="sticky no-print"><div class="sticky-inner"><button class="primary" id="stickyPdf">Generate PDF</button><button class="secondary" id="stickySave">Save</button></div><div class="save-note">Progress is saved automatically on this device</div></div>
+<div class="sticky no-print"><div class="sticky-inner"><button class="primary" id="stickyPdf" disabled>PDF locked · 100%</button><button class="secondary" id="stickySave">Save</button></div><div class="save-note">Progress is saved automatically on this device</div></div>
 <div class="toast" id="toast">Saved on this device</div>
 <script>
 const EQUIPMENT = [
@@ -88,9 +88,9 @@ function render(){
  const root=$("categories");root.innerHTML="";
  let index=0;
  EQUIPMENT.forEach(([category,items],ci)=>{
-  const section=document.createElement("section");section.className="category"+(ci===0?" open":"");section.dataset.category=category;
+  const section=document.createElement("section");section.className="category open";section.dataset.category=category;
   const count=items.reduce((n,item,i)=>n+(state.checks[key(category,item)]?.status?1:0),0);
-  section.innerHTML='<button class="cat-head" type="button" aria-expanded="'+(ci===0)+'"><span class="cat-icon">✓</span><span class="cat-name">'+safe(category)+'<span class="cat-meta">'+items.length+' checkpoints</span></span><span class="cat-count">'+count+' / '+items.length+'</span><span class="chevron">⌄</span></button><div class="cat-body"></div>';
+  section.innerHTML='<button class="cat-head" type="button" aria-expanded="true"><span class="cat-icon">✓</span><span class="cat-name">'+safe(category)+'<span class="cat-meta">'+items.length+' checkpoints</span></span><span class="cat-count">'+count+' / '+items.length+'</span><span class="chevron">🔒</span></button><div class="cat-body"></div><div class="cat-footer"><span>Checks completed</span><strong>'+count+' / '+items.length+'</strong></div>';
   const body=section.querySelector(".cat-body");
   items.forEach(item=>{
    const id=key(category,item);const current=state.checks[id]||{};const row=document.createElement("div");row.className="check-row";row.dataset.id=id;
@@ -98,17 +98,18 @@ function render(){
    row.innerHTML='<div class="check-top"><span class="check-name">'+safe(item)+'</span><span class="row-number">CHECK '+String(++index).padStart(2,"0")+'</span></div><div class="choices" role="group" aria-label="'+safe(item)+' status">'+buttons+'</div><div class="row-fields"><input class="hours" type="number" min="0" step="0.1" inputmode="decimal" placeholder="Hours" aria-label="'+safe(item)+' hours" value="'+safe(current.hours??"")+'"><input class="comment" type="text" maxlength="500" placeholder="Add inspection comment / defect details…" aria-label="'+safe(item)+' comment" value="'+safe(current.comment??"")+'"></div>';
    body.appendChild(row);
   });
-  section.querySelector(".cat-head").addEventListener("click",()=>{section.classList.toggle("open");section.querySelector(".cat-head").setAttribute("aria-expanded",section.classList.contains("open"));});
+  section.querySelector(".cat-head").addEventListener("click",()=>{if(!categoryComplete(category))return;section.classList.toggle("open");section.querySelector(".cat-head").setAttribute("aria-expanded",section.classList.contains("open"));});
   root.appendChild(section);
  });
  updateStats();
 }
-function getMeta(){return {operator:$("operator").value,date:$("date").value,plant:$("plant").value,shift:$("shift").value};}
+function getMeta(){return {operator:$("operator").value,date:$("date").value,plant:$("plant").value,hours:$("hours").value,shift:$("shift").value};}
+function categoryComplete(category){const items=EQUIPMENT.find(x=>x[0]===category)[1];return items.every(item=>Boolean(state.checks[key(category,item)]?.status));}
 function updateStats(){
  let checked=0,defects=0;
  EQUIPMENT.forEach(([c,items])=>items.forEach(item=>{const s=state.checks[key(c,item)]?.status;if(s){checked++;if(s!=="OK")defects++;}}));
- $("checkedStat").textContent=checked;$("defectStat").textContent=defects;$("remainingStat").textContent=TOTAL-checked;$("progressText").textContent=checked+" / "+TOTAL;$("progressFill").style.width=(checked/TOTAL*100)+"%";
- document.querySelectorAll(".category").forEach(section=>{const c=section.dataset.category;const total=EQUIPMENT.find(x=>x[0]===c)[1].length;let n=0;EQUIPMENT.find(x=>x[0]===c)[1].forEach(item=>{if(state.checks[key(c,item)]?.status)n++;});section.querySelector(".cat-count").textContent=n+" / "+total;});
+ $("checkedStat").textContent=checked;$("defectStat").textContent=defects;$("remainingStat").textContent=TOTAL-checked;$("progressText").textContent=checked+" / "+TOTAL;$("progressFill").style.width=(checked/TOTAL*100)+"%";const ready=checked===TOTAL;["pdfBtn","stickyPdf"].forEach(id=>{const b=$(id);b.disabled=!ready;b.textContent=ready?(id==="pdfBtn"?"Generate PDF report":"Generate PDF"):(id==="pdfBtn"?"PDF locked · Complete 100%":"PDF locked · 100%");});
+ document.querySelectorAll(".category").forEach(section=>{const c=section.dataset.category;const total=EQUIPMENT.find(x=>x[0]===c)[1].length;let n=0;EQUIPMENT.find(x=>x[0]===c)[1].forEach(item=>{if(state.checks[key(c,item)]?.status)n++;});section.querySelector(".cat-count").textContent=n+" / "+total;section.querySelector(".cat-footer strong").textContent=n+" / "+total;const complete=n===total;const head=section.querySelector(".cat-head");head.disabled=!complete;head.title=complete?"Tap to collapse or expand this completed category":"Complete every check to unlock collapse";section.querySelector(".chevron").textContent=complete?(section.classList.contains("open")?"⌄":"⌃"):"🔒";});
 }
 function save(show=true){
  state.meta=getMeta();
@@ -121,7 +122,7 @@ function load(){
 }
 function generatePDF(){
  save(false);const meta=getMeta();
- if(!meta.operator.trim()||!meta.date||!meta.plant.trim()){notify("Complete operator, date and plant first");return;}
+ const checked=EQUIPMENT.reduce((n,[c,items])=>n+items.filter(item=>Boolean(state.checks[key(c,item)]?.status)).length,0);if(checked!==TOTAL){notify("PDF locked: complete all "+TOTAL+" checks first");const first=EQUIPMENT.find(([c,items])=>items.some(item=>!state.checks[key(c,item)]?.status));if(first){const section=[...document.querySelectorAll(".category")].find(x=>x.dataset.category===first[0]);section?.scrollIntoView({behavior:"smooth",block:"center"});}return;}if(!meta.operator.trim()||!meta.date||!meta.plant.trim()){notify("Complete operator, date and plant first");return;}
  $("printOperator").textContent=meta.operator;$("printDate").textContent=meta.date;
  document.title="Kiverco-Plant-Checksheet-"+meta.date;
  document.querySelectorAll(".category").forEach(s=>s.classList.add("open"));
@@ -139,9 +140,9 @@ $("categories").addEventListener("input",e=>{
  if(e.target.classList.contains("comment"))item.comment=e.target.value;
  state.checks[row.dataset.id]=item;save(false);
 });
-["operator","date","plant","shift"].forEach(id=>$(id).addEventListener("change",()=>save(false)));
+["operator","date","plant","hours","shift"].forEach(id=>$(id).addEventListener("change",()=>save(false)));
 $("expandAll").onclick=()=>document.querySelectorAll(".category").forEach(s=>{s.classList.add("open");s.querySelector(".cat-head").setAttribute("aria-expanded","true");});
-$("collapseAll").onclick=()=>document.querySelectorAll(".category").forEach(s=>{s.classList.remove("open");s.querySelector(".cat-head").setAttribute("aria-expanded","false");});
+$("collapseAll").onclick=()=>document.querySelectorAll(".category").forEach(s=>{if(categoryComplete(s.dataset.category)){s.classList.remove("open");s.querySelector(".cat-head").setAttribute("aria-expanded","false");}});
 ["pdfBtn","stickyPdf"].forEach(id=>$(id).onclick=generatePDF);
 ["saveBtn","stickySave"].forEach(id=>$(id).onclick=()=>save(true));
 window.addEventListener("beforeprint",()=>document.querySelectorAll(".category").forEach(s=>s.classList.add("open")));
